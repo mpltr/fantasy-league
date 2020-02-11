@@ -1,5 +1,6 @@
 import React from 'react'
 import Tabs from '../../components/Tabs'
+import Table from '../../components/Table'
 
 const Tournament = (props) => {
     const tournamentId = props.url.query.id;
@@ -14,9 +15,11 @@ const Tournament = (props) => {
                         <div tabtitle="Group A">
                             <h3>Group A</h3>
                             <Tabs>
-                                <div tabtitle="Table">
-                                    Table
-                                </div>
+                                <Table tabtitle="Table"
+                                       players={props.players}
+                                       groupfilter="a">
+
+                                </Table>
                                 <div tabtitle="Fixtures">
                                     Fixtures
                                 </div>
@@ -67,8 +70,12 @@ const Tournament = (props) => {
 
 Tournament.getInitialProps = () => {
     return {
-        players: {
-            1: {
+        players: [
+            {
+                ID: 1,
+                name: 'Matt',
+                fplLink: 'http://google.co.uk',
+                userId: 1,
                 group: 'a',
                 played: 8,
                 won: 6,
@@ -78,11 +85,26 @@ Tournament.getInitialProps = () => {
                 against: 321,
                 gd: 243,
                 points: 18
-            }           
-        },
+            },
+            {
+                ID: 2,
+                name: 'Tom',
+                fplLink: 'http://amazon.co.uk',
+                userId: 0,
+                group: 'a',
+                played: 8,
+                won: 2,
+                lost: 6,
+                drawn: 0,
+                for: 321,
+                against: 564,
+                gd: -243,
+                points: 6
+            }          
+        ],
         groups: {
             a: {
-
+                
             }
         },
         knockout: {
