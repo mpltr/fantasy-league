@@ -8,6 +8,7 @@ const NewPlayer = (props) => {
                    value={props.player ? props.player.name : ''} 
                    onChange={(e) => props.update(props.index, 'name', e.target.value)}/>
             <input placeholder="FPL Link"
+                   type="url"
                    value={props.player ? props.player.fplLink : ''} 
                    onChange={(e) => props.update(props.index, 'fplLink', e.target.value)}/>
         </> 
