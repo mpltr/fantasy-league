@@ -7,6 +7,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
     "next": "latest",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
@@ -14,5 +15,8 @@
     "redux": "^3.6.0",
     "redux-devtools-extension": "^2.13.2"
   },
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "isomorphic-unfetch": "^3.0.0"
+  }
 }

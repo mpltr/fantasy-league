@@ -25,17 +25,20 @@ class CreateTournament extends Component {
     }
 
     createTournament = () => {
+        let form_data = new URLSearchParams();
+        form_data.append('data', JSON.stringify(this.state));
+        
         fetch('http://localhost:8000/createTournament', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
-            // 'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: JSON.stringify({data: this.state})
+            body: form_data
         }).then(res => res.json()).then((response) => {
-            console.log(response);
+            Router.push(`/tournaments/${response.tournamentUid}`);
         }).catch(err => {
-            console.log(err);
+            console.error(err);
+            
         })
     }
     

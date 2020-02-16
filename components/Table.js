@@ -20,22 +20,18 @@ class Table extends Component {
     }
 
     renderPlayers() {
-        return this.props.players.filter(player => {
-            if(this.props.groupfilter) return player.group === this.props.groupfilter
-        }).sort((playerA, playerB) => {
-            return playerA[this.state.sortBy] < playerB[this.state.sortBy] ? this.state.sortType : -this.state.sortType
-        }).map(player => {
+        return this.props.tablePlayerIds.map((playerId, i) => {
             return (
                 <tr>
-                    <td>{player.name}</td>
-                    <td>{player.played}</td>
-                    <td>{player.won}</td>
-                    <td>{player.drawn}</td>
-                    <td>{player.lost}</td>
-                    <td>{player.for}</td>
-                    <td>{player.against}</td>
-                    <td>{player.gd}</td>
-                    <td>{player.points}</td>
+                    <td>{this.props.players[playerId].name}</td>
+                    <td>{this.props.players[playerId].played || 0}</td>
+                    <td>{this.props.players[playerId].win || 0}</td>
+                    <td>{this.props.players[playerId].draw || 0}</td>
+                    <td>{this.props.players[playerId].loss || 0}</td>
+                    <td>{this.props.players[playerId].for || 0}</td>
+                    <td>{this.props.players[playerId].against || 0}</td>
+                    <td>{this.props.players[playerId].gd || 0}</td>
+                    <td>{this.props.players[playerId].points || 0}</td>
                 </tr>
             )
         })
