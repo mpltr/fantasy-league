@@ -5,10 +5,11 @@ import Router from 'next/router';
 class CreateTournament extends Component {
     state = {
         screen: 0,
-        noPlayers: 2,
-        noGroups: 1,
+        tournamentName: '',
+        numberOfPlayers: 2,
+        numberOfGroups: 1,
         startDate: '',
-        noPvp: 1,
+        numberOfPvpFixtures: 1,
         weeksBetweenFixtures: 3,
         playersToProgress: 1,
         newPlayers: []
@@ -24,37 +25,53 @@ class CreateTournament extends Component {
     }
 
     createTournament = () => {
-        alert('Tournament Created');
-        Router.push('/tournaments/1234');
+        fetch('http://localhost:8000/createTournament', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify({data: this.state})
+        }).then(res => res.json()).then((response) => {
+            console.log(response);
+        }).catch(err => {
+            console.log(err);
+        })
     }
     
     renderSettings() {
+        
         return (
             <div>
                 <h2>Tournament Settings</h2>
-                <label for="noPlayers">Number of Players</label>
-                <input name="noPlayers" 
+                <label for="tournamentName">Tournament Name</label>
+                <input name="tournamentName"
+                       value={this.state.tournamentName}
+                       onChange={(e) => this.setState({tournamentName: e.target.value})}
+                       ></input>
+                <label for="numberOfPlayers">Number of Players</label>
+                <input name="numberOfPlayers" 
                        type="number" 
-                       value={this.state.noPlayers}
+                       value={this.state.numberOfPlayers}
                        min="2" 
                        max="60"
-                       onChange={(e) => this.setState({noPlayers: e.target.value})}
+                       onChange={(e) => this.setState({numberOfPlayers: e.target.value})}
                        ></input>
-                <label for="noGroups">Number of Groups</label>
-                <input name="noGroups"
+                <label for="numberOfGroups">Number of Groups</label>
+                <input name="numberOfGroups"
                     type="number"
-                    value={this.state.noGroups}
+                    value={this.state.numberOfGroups}
                     min="1"
                     max="10"
-                    onChange={(e) => this.setState({ noGroups: e.target.value })}
+                    onChange={(e) => this.setState({ numberOfGroups: e.target.value })}
                 ></input>
-                <label for="noPvp">Number of Times to play each player in group</label>
-                <input name="noPvp"
+                <label for="numberOfPvpFixtures">Number of Times to play each player in group</label>
+                <input name="numberOfPvpFixtures"
                     type="number"
-                    value={this.state.noPvp}
+                    value={this.state.numberOfPvpFixtures}
                     min="1"
                     max="4"
-                    onChange={(e) => this.setState({ noPvp: e.target.value })}
+                    onChange={(e) => this.setState({ numberOfPvpFixtures: e.target.value })}
                 ></input>
                 <label for="weeksBetweenFixtures">Weeks between fixtures</label>
                 <input name="weeksBetweenFixtures"
@@ -84,7 +101,7 @@ class CreateTournament extends Component {
     
     renderPlayers = () => {
         const players = [];
-        for (let i = 0; i < this.state.noPlayers; i++) {
+        for (let i = 0; i < this.state.numberOfPlayers; i++) {
             players.push(
                 <NewPlayer index={i} player={this.state.newPlayers[i] ?? null} update={this.updatePlayerValue} />
             )
