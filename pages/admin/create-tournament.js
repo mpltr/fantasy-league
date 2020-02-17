@@ -27,8 +27,10 @@ class CreateTournament extends Component {
     createTournament = () => {
         let form_data = new URLSearchParams();
         form_data.append('data', JSON.stringify(this.state));
+
+        console.log(JSON.stringify(this.state));
         
-        fetch('http://localhost:8000/createTournament', {
+        fetch('http://localhost/fantasy-league-api/public/createTournament', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
