@@ -6,10 +6,10 @@ class Fixtures extends Component {
     
     render() { 
         return ( 
-            <div>
+            <div className="container">
                 {this.props.fixtures && Object.keys(this.props.fixtures).map((date, i) => {
                     return (
-                        <div key={i}>
+                        <div className="wrapper" key={i}>
                             <h3 className="date">{date}</h3>
                             <div className="week-fixtures">
                                 {this.props.fixtures[date].map((fixture, k) => {
@@ -18,8 +18,8 @@ class Fixtures extends Component {
                                     return(
                                         <div className="fixture" key={k}>
                                             <div className="name home">{homePlayer.name}</div>
-                                            <div className="score">{fixture.homePlayerScore}-</div>
-                                            <div className="score">{fixture.awayPlayerScore}-</div>
+                                            <div className="score">{fixture.homePlayerScore || '-'}</div>
+                                            <div className="score">{fixture.awayPlayerScore || '-'}</div>
                                             <div className="name">{awayPlayer.name}</div>
                                         </div>
                                     );
@@ -29,8 +29,11 @@ class Fixtures extends Component {
                     );
                 })}
                    <style jsx>{`
+                        .container {
+                            padding-top: 32px;
+                        }
                         .week-fixtures {
-                            padding: 2px 0 16px 0;
+                            padding: 8px 0 32px 0;
                         }
                         .fixture {
                             display: flex;
@@ -39,10 +42,10 @@ class Fixtures extends Component {
                         }
                         .date {
                             display: block;
-                            font-size: 12px;
+                            font-size: 13px;
                             text-align: center;
-                            color: dark-grey;
-                            font-weight: 100;
+                            color: var(--grey);
+                            font-weight: bold;
                             margin-bottom: 8px;
                         }
                         .name {
