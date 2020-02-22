@@ -8,7 +8,7 @@ const Tabs = (props) => {
                 {props.children.map((child, index) => {
                     return (
                             <button key={index} 
-                                    className={tab === index ? 'tab-active' : 'tab' }
+                                    className={tab === index ? 'tab tab-active' : 'tab' }
                                     onClick={() => setTab(index)}>
                                 {child.props.tabtitle ?? 'Set Tab Title'}
                             </button>
@@ -33,30 +33,41 @@ const Tabs = (props) => {
                 .header {
                     width: 100%;
                     display: flex;
+                    flex-wrap: wrap;
                     margin-bottom: 16px;
                     border-radius: 4px;
                     overflow: hidden;
                 }
                 .tab {
+                    position: relative;
                     flex-grow: 1;
-                    flex-shrink: 0;
+                    flex-basis: 10%;
                     border: none;
                     background-color: #f0f0f0;
-                    padding: 16px 0;
+                    padding: 16px 4px;
                     text-transform: uppercase;
                     font-size: 11px;
                     color: grey;
+                    white-space: nowrap;
+                }
+                .tab:after {
+                    content: "";
+                    position: absolute;
+                    width: 1px;
+                    height: 70%;
+                    top: 15%;
+                    right: 0;
+                    background-color: var(--lightGreyAlt);
+                }
+                .tab:last-child:after {
+                    display: none;
                 }
                 .tab-active {
-                    flex-grow: 1;
-                    flex-shrink: 0;
-                    background-color: #34bcb9;
+                    background-color: var(--teal);
                     color: #fff;
-                    border: none;
-                    padding: 16px 0;
-                    text-transform: uppercase;
-                    font-size: 11px;
-                    letter-spacing: .5px;
+                }
+                .tab-active:after {
+                    display: none;
                 }
                 .tab:active, 
                 .tab:focus, 
@@ -67,7 +78,7 @@ const Tabs = (props) => {
                     outline:none;
                 }
                 .content-active {
-
+                    width: 100%;
                 }
                 .content-hidden {
                     display: none;
