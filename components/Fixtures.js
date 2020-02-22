@@ -44,14 +44,14 @@ class Fixtures extends Component {
                             display: block;
                             font-size: 13px;
                             text-align: center;
-                            color: var(--grey);
+                            color: var(--darkGrey);
                             font-weight: bold;
                             margin-bottom: 8px;
                         }
                         .name {
                             width: calc(50% - 42px);
                             padding: 4px 8px;
-                            color: grey;
+                            color: var(--darkGrey);
                         }
 
                         .home {
@@ -61,10 +61,16 @@ class Fixtures extends Component {
 
                         .score {
                             width: 40px;
-                            background-color: #f0f0f0;
+                            color: var(--darkGrey);
+                            background-color: var(--lightGrey);
                             margin: 0 1px;
                             padding: 4px;
                             text-align: center;
+                        }
+                        @media (max-width: 567px) {
+                            .container {
+                                padding-top: 8px;
+                            }                           
                         }
                     `}</style>
             </div>

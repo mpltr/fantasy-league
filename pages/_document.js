@@ -10,9 +10,12 @@ class MyDocument extends Document {
 
                     <style jsx global>{`
                         * {
-                            --light-grey: light-grey;
+                            --lightGrey: #f0f0f0;
+                            --lightGreyAlt: #f2f2f2;
                             --grey: grey;
-                            --dark-grey: dark-grey;
+                            --darkGrey: #6c6c6c;
+                            
+                            --teal: #34bcb9;
                         }
 
                         body {
@@ -22,6 +25,16 @@ class MyDocument extends Document {
                             line-height: 1.33;
                             letter-spacing: 0.5px;
                             color: rgba(0,0,0,.8);
+                        }
+
+                        input {
+                            display: block;
+                            padding: 8px;
+                            background-color: var(--lightGrey);
+                            color: var(--darkGrey);
+                            text-align: center;
+                            border: hidden;
+                            outline: none;
                         }
 
                         a {
