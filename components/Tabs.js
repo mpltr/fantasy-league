@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 
 const Tabs = (props) => {
     const [tab, setTab] = useState(0);
+    // catch if a single child is passed and create array of children instead
     const children = props.children.length == undefined ? [props.children] : props.children
     return ( 
         <div className="wrapper">
