@@ -9,28 +9,26 @@ const Tournament = (props) => {
         <div className="container">
             <h1>{props.name}</h1>
             <Tabs>
-                <div tabtitle="Groups">
-                    <Tabs>
-                        {props.tables && Object.keys(props.tables).map((key, i) => {
-                            return (
-                                <div key={i} tabtitle={`Group  ${key}`} >
-                                    <Tabs>
-                                        <Table tabtitle="Table"
-                                                players={props.players}
-                                                tablePlayerIds={props.tables[key]}
-                                                numberOfGroupTeamsToProgress={props.numberOfGroupTeamsToProgress}>
-                                        </Table>
-                                        <Fixtures tabtitle="Fixtures"
-                                                    fixtures={props.fixtures[key]}
-                                                    players={props.players}>
-                                            Fixtures
-                                        </Fixtures>
-                                    </Tabs>
-                                </div>
-                            );
-                        })}
-                    </Tabs>
-                </div>
+                <Tabs tabtitle="Groups">
+                    {props.tables && Object.keys(props.tables).map((key, i) => {
+                        return (
+                            <div key={i} tabtitle={`Group  ${key}`} >
+                                <Tabs>
+                                    <Table tabtitle="Table"
+                                            players={props.players}
+                                            tablePlayerIds={props.tables[key]}
+                                            numberOfGroupTeamsToProgress={props.numberOfGroupTeamsToProgress}>
+                                    </Table>
+                                    <Fixtures tabtitle="Fixtures"
+                                                fixtures={props.fixtures[key]}
+                                                players={props.players}>
+                                        Fixtures
+                                    </Fixtures>
+                                </Tabs>
+                            </div>
+                        );
+                    })}
+                </Tabs>
                 { props.fixtures['Last 16'] &&
                     <Tabs tabtitle="Knockouts" test={true} >
                         <Fixtures tabtitle="Last 16"
@@ -40,14 +38,13 @@ const Tournament = (props) => {
                         {/* <div></div> */}
                     </Tabs>
                 }
-                <div tabtitle="Stats">
-                    <Tabs>
-                        <Table tabtitle="Overall Table"
-                               players={props.players}
-                               tablePlayerIds={Object.keys(props.players).map(playerId => playerId)}
-                        ></Table>
-                    </Tabs>
-                </div>
+                <Tabs tabtitle="Stats">
+                    <Table tabtitle="Overall Table"
+                            players={props.players}
+                            tablePlayerIds={Object.keys(props.players).map(playerId => playerId)}
+                    ></Table>
+                </Tabs>
+                
             </Tabs>
             <style jsx>{`
                 .container {
