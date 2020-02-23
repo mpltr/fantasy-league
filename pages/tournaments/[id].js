@@ -14,8 +14,7 @@ const Tournament = (props) => {
                     <Tabs>
                             {props.tables && Object.keys(props.tables).map((key, i) => {
                                 return (
-                                    <div tabtitle={`Group  ${key}`} >
-                            
+                                    <div key={i} tabtitle={`Group  ${key}`} >
                                         <Tabs>
                                             <Table tabtitle="Table"
                                                     players={props.players}

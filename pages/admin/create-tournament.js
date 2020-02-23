@@ -25,17 +25,15 @@ class CreateTournament extends Component {
     }
 
     createTournament = () => {
-        let form_data = new URLSearchParams();
-        form_data.append('data', JSON.stringify(this.state));
+        let formData = new URLSearchParams();
+        formData.append('data', JSON.stringify(this.state));
 
-        console.log(JSON.stringify(this.state));
-        
         fetch('http://localhost/fantasy-league-api/public/createTournament', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: form_data
+            body: formData
         }).then(res => res.json()).then((response) => {
             Router.push(`/tournaments/${response.tournamentUid}`);
         }).catch(err => {
@@ -100,13 +98,13 @@ class CreateTournament extends Component {
                     max="4"
                     onChange={(e) => this.setState({ numberOfKnockoutRounds: e.target.value })}
                 ></input>
-                 <style jsx global>{`
+                <style jsx>{`
                         input {
                             margin: 4px 0 8px 0;
                             width: calc(100% - 16px);
                         }
                     `}
-                    </style>
+                </style>
             </div>
         )
     }
@@ -139,7 +137,7 @@ class CreateTournament extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="container">
                 {this.state.screen === 0 && this.renderSettings()}
                 {this.state.screen === 1 && this.renderPlayers()}
                 <div className="button-wrapper">
@@ -149,6 +147,10 @@ class CreateTournament extends Component {
                 </div>
 
                 <style jsx global>{`
+                    .container {
+                        max-width: 800px;
+                        margin: auto;
+                    }
                     .button-wrapper {
                         display: flex;
                         justify-content: space-between;

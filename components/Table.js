@@ -38,7 +38,7 @@ class Table extends Component {
             return this.state.descending ? bPrimary - aPrimary : aPrimary - bPrimary;
         }).map((playerId, i) => {
             return (
-                <tr>
+                <tr key={i}>
                     <td className="cell">{this.props.players[playerId].name}</td>
                     <td className="cell">{this.props.players[playerId].played || 0}</td>
                     <td className="cell no-mobile">{this.props.players[playerId].win || 0}</td>
