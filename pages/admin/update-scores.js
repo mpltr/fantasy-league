@@ -7,8 +7,18 @@ const UpdateScores = (props) => {
     // create state from props
     const [fixtures, updateFixtures] = useState(props.fixtures)
     const submitToApi = useCallback(() => {
+
+        console.log(JSON.stringify({
+            fixtures: fixtures, 
+            id: props.id
+        }));
+        
+
         let formData = new URLSearchParams()
-        formData.append('data', JSON.stringify(fixtures))
+        formData.append('data', JSON.stringify({
+            fixtures: fixtures, 
+            id: props.id
+        }));
 
         fetch('http://localhost/fantasy-league-api/public/updateFixtures', {
             method: 'POST',
@@ -67,11 +77,12 @@ UpdateScores.getInitialProps = async (context) => {
     })
 
     return {
+        id: data.id,
         name: data.name, 
         players: data.players,
         tables: data.tables,
         fixtures: mergedFixtures,
-        mergedFixtures: mergedFixtures
+        mergedFixtures: mergedFixtures,
     }
     return {}
 }

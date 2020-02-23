@@ -25,21 +25,39 @@ class CreateTournament extends Component {
     }
 
     createTournament = () => {
-        let formData = new URLSearchParams();
-        formData.append('data', JSON.stringify(this.state));
-
-        fetch('http://localhost/fantasy-league-api/public/createTournament', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: formData
-        }).then(res => res.json()).then((response) => {
-            Router.push(`/tournaments/${response.tournamentUid}`);
-        }).catch(err => {
-            console.error(err);
-            
-        })
+       
+        //  TODO: better validation 
+        if(
+            this.state.tournamentName
+            && this.state.numberOfPlayers
+            && this.state.numberOfGroups
+            && this.state.startDate
+            && this.state.numberOfPvpFixtures
+            && this.state.weeksBetweenFixtures
+            && this.state.numberOfKnockoutRounds
+            && this.state.newPlayers.length === this.state.numberOfPlayers
+            && this.state.newPlayers.every(player => {
+                return player.hasOwnProperty('name');
+            })         
+        ) {
+            let formData = new URLSearchParams();
+            formData.append('data', JSON.stringify(this.state));
+    
+            fetch('http://localhost/fantasy-league-api/public/createTournament', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: formData
+            }).then(res => res.json()).then((response) => {
+                Router.push(`/tournaments/${response.tournamentUid}`);
+            }).catch(err => {
+                console.error(err);
+            })
+        } else {
+            alert('One or more fields missing');
+        }
+        
     }
     
     renderSettings() {
@@ -63,45 +81,50 @@ class CreateTournament extends Component {
                        type="number" 
                        value={this.state.numberOfPlayers}
                        min="2" 
-                       max="60"
+                       max="56"
                        onChange={(e) => this.setState({numberOfPlayers: e.target.value})}
                        ></input>
                 <label for="numberOfGroups">Number of Groups</label>
-                <input name="numberOfGroups"
-                    type="number"
-                    value={this.state.numberOfGroups}
-                    min="1"
-                    max="10"
-                    onChange={(e) => this.setState({ numberOfGroups: e.target.value })}
-                ></input>
+                <select name="numberOfGroups"
+                        onChange={(e) => this.setState({ numberOfGroups: e.target.value })}
+                >
+                    <option value="1" selected={this.state.numberOfGroups == 1 ? 'selected' : ''}>1</option>
+                    <option value="2" selected={this.state.numberOfGroups == 2 ? 'selected' : ''}>2</option>
+                    <option value="4" selected={this.state.numberOfGroups == 4 ? 'selected' : ''}>4</option>
+                    <option value="8" selected={this.state.numberOfGroups == 8 ? 'selected' : ''}>8</option>
+                </select>
                 <label for="numberOfPvpFixtures">Number of Times to play each player in group</label>
                 <input name="numberOfPvpFixtures"
-                    type="number"
-                    value={this.state.numberOfPvpFixtures}
-                    min="1"
-                    max="4"
-                    onChange={(e) => this.setState({ numberOfPvpFixtures: e.target.value })}
+                       type="number"
+                       value={this.state.numberOfPvpFixtures}
+                       min="1"
+                       max="4"
+                       onChange={(e) => this.setState({ numberOfPvpFixtures: e.target.value })}
                 ></input>
                 <label for="weeksBetweenFixtures">Weeks between fixtures</label>
                 <input name="weeksBetweenFixtures"
-                    type="number"
-                    value={this.state.weeksBetweenFixtures}
-                    min="1"
-                    max="10"
-                    onChange={(e) => this.setState({ weeksBetweenFixtures: e.target.value })}
+                       type="number"
+                       value={this.state.weeksBetweenFixtures}
+                       min="1"
+                       max="10"
+                       onChange={(e) => this.setState({ weeksBetweenFixtures: e.target.value })}
                 ></input>
                 <label for="numberOfKnockoutRounds">Number of Knockout Rounds</label>
                 <input name="numberOfKnockoutRounds"
-                    type="number"
-                    value={this.state.numberOfKnockoutRounds}
-                    min="1"
-                    max="4"
-                    onChange={(e) => this.setState({ numberOfKnockoutRounds: e.target.value })}
+                        type="number"
+                        value={this.state.numberOfKnockoutRounds}
+                        min="1"
+                        max="4"
+                        onChange={(e) => this.setState({ numberOfKnockoutRounds: e.target.value })}
                 ></input>
                 <style jsx>{`
-                        input {
+                        input, select {
+                            text-align: left;
                             margin: 4px 0 8px 0;
                             width: calc(100% - 16px);
+                        }
+                        select {
+                            width: 100%;
                         }
                     `}
                 </style>

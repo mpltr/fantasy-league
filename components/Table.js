@@ -38,7 +38,7 @@ class Table extends Component {
             return this.state.descending ? bPrimary - aPrimary : aPrimary - bPrimary;
         }).map((playerId, i) => {
             return (
-                <tr key={i}>
+                <tr className="row" key={i}>
                     <td className="cell">{this.props.players[playerId].name}</td>
                     <td className="cell">{this.props.players[playerId].played || 0}</td>
                     <td className="cell no-mobile">{this.props.players[playerId].win || 0}</td>
@@ -52,13 +52,15 @@ class Table extends Component {
                         .cell {
                             text-align: center;
                             color: var(--darkGrey);
-                            padding: 6px 0 6px 8px;
+                            padding: 5px 0 9px 8px;
                             font-size: 13px;
                         }
                         .cell:first-child {
                             text-align: left;
                         }
-
+                        .row:nth-child(${this.props.numberOfGroupTeamsToProgress}) td {
+                            border-bottom: 1px dashed var(--grey);
+                        }
                         @media (max-width: 567px) {
                             .no-mobile {
                                 display: none;

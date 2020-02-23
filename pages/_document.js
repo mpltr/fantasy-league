@@ -12,7 +12,7 @@ class MyDocument extends Document {
                         * {
                             --lightGrey: #f0f0f0;
                             --lightGreyAlt: #f2f2f2;
-                            --grey: grey;
+                            --grey: #d8d8d8;
                             --darkGrey: #6c6c6c;
                             
                             --teal: #34bcb9;
@@ -26,7 +26,7 @@ class MyDocument extends Document {
                             color: var(--darkGrey);
                         }
 
-                        input {
+                        input, select {
                             display: block;
                             padding: 8px;
                             background-color: var(--lightGrey);

@@ -2,21 +2,22 @@ import React, {useState} from 'react';
 
 const Tabs = (props) => {
     const [tab, setTab] = useState(0);
+    const children = props.children.length == undefined ? [props.children] : props.children
     return ( 
         <div className="wrapper">
             <div className="header">
-                {props.children.map((child, index) => {
+                {children.filter(child => child !== undefined).map((child, index) => {
                     return (
-                            <button key={index} 
-                                    className={tab === index ? 'tab tab-active' : 'tab' }
-                                    onClick={() => setTab(index)}>
-                                {child.props.tabtitle ?? 'Set Tab Title'}
-                            </button>
+                        <button key={index} 
+                                className={tab === index ? 'tab tab-active' : 'tab' }
+                                onClick={() => setTab(index)}>
+                            {child.props.tabtitle ?? 'Set Tab Title'}
+                        </button>
                     )
                 })}
             </div>
             <div>
-                {props.children.map((child, index) => {
+                {children.filter(child => child !== undefined).map((child, index) => {
                     return (
                         <div key={index}
                              className={tab === index ? 'content-active' : 'content-hidden'}>
@@ -26,7 +27,6 @@ const Tabs = (props) => {
                 })}
             </div>
             <style jsx>{`
-
                 .wrapper {
                 }
                 
