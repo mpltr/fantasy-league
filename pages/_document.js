@@ -19,12 +19,11 @@ class MyDocument extends Document {
                         }
 
                         body {
-                            bacground-color: white;
                             font-family: 'Karla';
                             font-size: 12px;
                             line-height: 1.33;
                             letter-spacing: 0.5px;
-                            color: rgba(0,0,0,.8);
+                            color: var(--darkGrey);
                         }
 
                         input {
@@ -39,6 +38,14 @@ class MyDocument extends Document {
 
                         a {
                             text-decoration: none; 
+                        }
+
+                        button {
+                            background-color: var(--teal);
+                            border: none;
+                            color: white;
+                            padding: 12px 20px;
+                            cursor: pointer;
                         }
                     `}
                     </style>

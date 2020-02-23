@@ -1,16 +1,101 @@
 import React, { Component } from 'react';
 
 class Fixtures extends Component {
+
+    renderUserDate(date) {
+        return (
+            <h3 className="date">{date}
+                <style jsx>{`
+                    .date {
+                        display: block;
+                        font-size: 13px;
+                        text-align: center;
+                        color: var(--darkGrey);
+                        font-weight: bold;
+                        margin-bottom: 8px;
+                    }
+                `}</style>
+            </h3>
+        )
+    }
+
+    renderAdminDate(date) {
+        return (
+            <>
+                <input className="date"
+                       type="date"
+                       value={date}
+                       onChange={e => {
+                            const newDate = e.target.value;
+                            const newFixtures = { ...this.props.fixtures};
+                            newFixtures[newDate] = this.props.fixtures[date]
+                            delete newFixtures[date]                                    
+                            this.props.updateFixtures(newFixtures)
+                       }}>
+                </input>
+                <style jsx>{`
+                    .date {
+                        margin: auto;
+                    }
+                `}</style>
+            </>
+        )
+    }
+
+    renderUserScore(score) {
+        return (
+            <div className="score">
+                {score || '-'}
+                <style jsx>{`
+                    .score {
+                        width: 40px;
+                        color: var(--darkGrey);
+                        background-color: var(--lightGrey);
+                        margin: 0 1px;
+                        padding: 4px;
+                        text-align: center;
+                    }
+                `}</style>
+            </div>
+        )
+    }
+
+    renderAdminScore(score, date, index, home=false) {
+        return (
+            <>
+                <input  className="score"
+                        value={score || ""}
+                        onChange={e => {
+                            const newFixtures = {...this.props.fixtures}
+                            const idKey = home ? 'homePlayerScore' : 'awayPlayerScore';
+                            newFixtures[date][index][idKey] = e.target.value
+                            this.props.updateFixtures(newFixtures)
+                        }}>
+                
+                </input>
+                <style jsx>{`
+                    .score {
+                        width: 40px;
+                        color: var(--darkGrey);
+                        background-color: var(--lightGrey);
+                        margin: 0 1px;
+                        padding: 4px;
+                        text-align: center;
+                    }
+                `}</style>
+            </>
+        )
+    }
  
-    state = {  }
-    
     render() { 
         return ( 
             <div className="container">
-                {this.props.fixtures && Object.keys(this.props.fixtures).map((date, i) => {
+                {this.props.fixtures && Object.keys(this.props.fixtures).sort().map((date, i) => {
                     return (
                         <div className="wrapper" key={i}>
-                            <h3 className="date">{date}</h3>
+                            {this.props.editmode 
+                            ? this.renderAdminDate(date) 
+                            : this.renderUserDate(date)}
                             <div className="week-fixtures">
                                 {this.props.fixtures[date].map((fixture, k) => {
                                     const homePlayer = this.props.players[fixture.homePlayerId];
@@ -18,8 +103,12 @@ class Fixtures extends Component {
                                     return(
                                         <div className="fixture" key={k}>
                                             <div className="name home">{homePlayer.name}</div>
-                                            <div className="score">{fixture.homePlayerScore || '-'}</div>
-                                            <div className="score">{fixture.awayPlayerScore || '-'}</div>
+                                            {this.props.editmode
+                                            ? this.renderAdminScore(fixture.homePlayerScore, date, k, true)
+                                            : this.renderUserScore(fixture.homePlayerScore)}
+                                            {this.props.editmode
+                                            ? this.renderAdminScore(fixture.awayPlayerScore, date, k)
+                                            : this.renderUserScore(fixture.awayPlayerScore)}
                                             <div className="name">{awayPlayer.name}</div>
                                         </div>
                                     );
@@ -40,14 +129,6 @@ class Fixtures extends Component {
                             justify-content: center;
                             margin-bottom: 4px;
                         }
-                        .date {
-                            display: block;
-                            font-size: 13px;
-                            text-align: center;
-                            color: var(--darkGrey);
-                            font-weight: bold;
-                            margin-bottom: 8px;
-                        }
                         .name {
                             width: calc(50% - 42px);
                             padding: 4px 8px;
@@ -59,14 +140,6 @@ class Fixtures extends Component {
                             padding: 4px 8px;
                         }
 
-                        .score {
-                            width: 40px;
-                            color: var(--darkGrey);
-                            background-color: var(--lightGrey);
-                            margin: 0 1px;
-                            padding: 4px;
-                            text-align: center;
-                        }
                         @media (max-width: 567px) {
                             .container {
                                 padding-top: 8px;
