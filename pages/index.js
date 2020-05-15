@@ -3,7 +3,7 @@ import { withRedux } from '../lib/redux'
 
 const IndexPage = (props) => {
   return ( 
-    'Home page'
+    'TODO: Home page layout. API required to access tournaments'
   );
 }
 
