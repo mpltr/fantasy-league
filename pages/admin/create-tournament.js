@@ -25,6 +25,9 @@ class CreateTournament extends Component {
     }
 
     createTournament = () => {
+
+        console.log(this.state.newPlayers.length);
+        console.log(this.state.numberOfPlayers);
        
         //  TODO: better validation 
         if(
@@ -35,7 +38,7 @@ class CreateTournament extends Component {
             && this.state.numberOfPvpFixtures
             && this.state.weeksBetweenFixtures
             && this.state.numberOfKnockoutRounds
-            && this.state.newPlayers.length === this.state.numberOfPlayers
+            && this.state.newPlayers.length === parseInt(this.state.numberOfPlayers)
             && this.state.newPlayers.every(player => {
                 return player.hasOwnProperty('name');
             })         
@@ -114,7 +117,7 @@ class CreateTournament extends Component {
                         type="number"
                         value={this.state.numberOfKnockoutRounds}
                         min="1"
-                        max="4"
+                        max="6"
                         onChange={(e) => this.setState({ numberOfKnockoutRounds: e.target.value })}
                 ></input>
                 <style jsx>{`
