@@ -13,7 +13,7 @@ const Tournaments = ({data}) => {
 
 Tournaments.getInitialProps = async (context) => {
 
-    const data = await fetch(`http://localhost/fantasy-league-api/public/get-tournaments`).then(res => res.json())
+    const data = await fetch(`https://stormy-gorge-28890.herokuapp.com/get-tournaments`).then(res => res.json())
 
     return {
         data
