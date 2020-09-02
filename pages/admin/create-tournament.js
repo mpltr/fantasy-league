@@ -45,8 +45,7 @@ class CreateTournament extends Component {
         ) {
             let formData = new URLSearchParams();
             formData.append('data', JSON.stringify(this.state));
-    
-            fetch('http://localhost/fantasy-league-api/public/createTournament', {
+            fetch('https://stormy-gorge-28890.herokuapp.com/createTournament', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',

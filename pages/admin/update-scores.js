@@ -20,7 +20,7 @@ const UpdateScores = (props) => {
             id: props.id
         }));
 
-        fetch('http://localhost/fantasy-league-api/public/updateFixtures', {
+        fetch('https://stormy-gorge-28890.herokuapp.com/updateFixtures', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -62,7 +62,7 @@ const UpdateScores = (props) => {
 UpdateScores.getInitialProps = async (context) => {
 
     const uid = context.query.tournamentId
-    const data = await fetch(`http://localhost/fantasy-league-api/public/get-tournament/${uid}`).then(res => res.json())
+    const data = await fetch(`https://stormy-gorge-28890.herokuapp.com/get-tournament/${uid}`).then(res => res.json())
 
     // merge fixtures
     const mergedFixtures =  {}
