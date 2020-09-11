@@ -51,18 +51,22 @@ const Tabs = (props) => {
                     color: grey;
                     white-space: nowrap;
                     user-select: none;
+                    letter-spacing: 0.3px;
                 }
                 .tab-red {
                     background-color: var(--red);
                     color: #fff;
+                    font-weight: bold;
                 }
                 .tab-purple {
                     background-color: var(--purple);
                     color: #fff;
+                    font-weight: bold;
                 }
                 .tab-teal {
                     background-color: var(--teal);
-                    color: var(--purple);
+                    color: #fff;
+                    font-weight: bold;
                 }
                 .tab-active:after {
                     display: none;
