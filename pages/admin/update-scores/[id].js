@@ -8,19 +8,13 @@ const UpdateScores = (props) => {
     const [fixtures, updateFixtures] = useState(props.fixtures)
     const submitToApi = useCallback(() => {
 
-        console.log(JSON.stringify({
-            fixtures: fixtures, 
-            id: props.id
-        }));
-        
-
         let formData = new URLSearchParams()
         formData.append('data', JSON.stringify({
             fixtures: fixtures, 
             id: props.id
         }));
 
-        fetch(`${process.env.NEXT_PUBLIC_API}/updateFixtures`, {
+        fetch(`${process.env.NEXT_PUBLIC_API}/fixtures`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -62,7 +56,7 @@ const UpdateScores = (props) => {
 UpdateScores.getInitialProps = async (context) => {
 
     const uid = context.query.id
-    const data = await fetch(`${process.env.NEXT_PUBLIC_API}/get-tournament/${uid}`).then(res => res.json())
+    const data = await fetch(`${process.env.NEXT_PUBLIC_API}/tournament/${uid}`).then(res => res.json())
 
     // merge fixtures
     const mergedFixtures =  {}

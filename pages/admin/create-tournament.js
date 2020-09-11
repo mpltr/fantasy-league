@@ -42,7 +42,7 @@ class CreateTournament extends Component {
         ) {
             let formData = new URLSearchParams();
             formData.append('data', JSON.stringify(this.state));
-            fetch(`${process.env.NEXT_PUBLIC_API}/createTournament`, {
+            fetch(`${process.env.NEXT_PUBLIC_API}/tournament`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',

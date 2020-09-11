@@ -3,11 +3,15 @@ import Tabs from '../../components/Tabs'
 import Table from '../../components/Table'
 import fetch from 'isomorphic-fetch'
 import Fixtures from '../../components/Fixtures'
+import Message from '../../components/Message'
 
 const Tournament = (props) => {
     return ( 
         <div className="container">
-            <h1>{`FPL Cup ${props.name}`}</h1>
+            <div className="header">
+                <h1>{`FPL Cup ${props.name}`}</h1>
+                <Message updates={props.updates}/>
+            </div>
             <Tabs color="purple">
                 <Tabs tabtitle="Groups" color="red">
                     {props.tables && Object.keys(props.tables).map((key, i) => {
@@ -51,6 +55,11 @@ const Tournament = (props) => {
                     max-width: 800px;
                     margin: auto;
                 }
+                .header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
                 h1 {
                     color: var(--darkGrey);
                 }
@@ -62,15 +71,16 @@ const Tournament = (props) => {
 Tournament.getInitialProps = async (context) => {
 
     const uid = context.query.id;
-    const data = await fetch(`${process.env.NEXT_PUBLIC_API}/get-tournament/${uid}`).then(res => res.json());
+    const {name, numberOfGroupTeamsToProgress, players, tables, fixtures, knockout, updates} = await fetch(`${process.env.NEXT_PUBLIC_API}/tournament/${uid}`).then(res => res.json());
 
     return {
-        name: data.name, 
-        numberOfGroupTeamsToProgress: data.numberOfGroupTeamsToProgress, 
-        players: data.players,
-        tables: data.tables,
-        fixtures: data.fixtures,
-        knockout: data.knockout
+        name,
+        numberOfGroupTeamsToProgress,
+        players,
+        tables,
+        fixtures,
+        knockout,
+        updates,
     };
 }
  

@@ -13,9 +13,7 @@ const Tournaments = ({data}) => {
 
 Tournaments.getInitialProps = async (context) => {
 
-    console.log(`${process.env.NEXT_PUBLIC_API}/get-tournaments`);
-
-    const data = await fetch(`${process.env.NEXT_PUBLIC_API}/get-tournaments`).then(res => res.json())
+    const data = await fetch(`${process.env.NEXT_PUBLIC_API}/tournament`).then(res => res.json())
 
     return {
         data
