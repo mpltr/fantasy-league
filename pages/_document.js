@@ -9,7 +9,7 @@ class MyDocument extends Document {
                     <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet" />
 
                     <style jsx global>{`
-                        * {
+                        :root {
                             --lightGrey: #f0f0f0;
                             --lightGreyAlt: #f2f2f2;
                             --grey: #d8d8d8;
