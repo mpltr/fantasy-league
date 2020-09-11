@@ -1,6 +1,6 @@
 import React, {useState, useCallback} from 'react'
-import Fixtures from '../../components/Fixtures'
-import Tabs from '../../components/Tabs'
+import Fixtures from '../../../components/Fixtures'
+import Tabs from '../../../components/Tabs'
 import fetch from 'isomorphic-fetch'
 
 const UpdateScores = (props) => {
@@ -61,7 +61,7 @@ const UpdateScores = (props) => {
 
 UpdateScores.getInitialProps = async (context) => {
 
-    const uid = context.query.tournamentId
+    const uid = context.query.id
     const data = await fetch(`${process.env.NEXT_PUBLIC_API}/get-tournament/${uid}`).then(res => res.json())
 
     // merge fixtures
