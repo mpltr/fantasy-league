@@ -1,9 +1,9 @@
 import React from 'react'
-import Tabs from '../../components/Tabs'
-import Table from '../../components/Table'
+import Tabs from '../components/Tabs'
+import Table from '../components/Table'
 import fetch from 'isomorphic-fetch'
-import Fixtures from '../../components/Fixtures'
-import Message from '../../components/Message'
+import Fixtures from '../components/Fixtures'
+import Message from '../components/Message'
 
 const Tournament = (props) => {
     return ( 
