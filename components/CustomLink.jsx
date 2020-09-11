@@ -1,11 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
 
-const CustomLink = ({url, label}) => {
+const CustomLink = ({url, label, target='_self'}) => {
     return  (
         <>
             <Link href={url}>
-                <a>{label}</a>
+                <a target={target}>{label}</a>
             </Link>
             <style jsx>{`
                 a {
