@@ -8,10 +8,12 @@
     --darkGrey: #636363;
     
     --teal: #34b3b1;
-    --blue: #060707;
+    --blue: #04f5ff;
     --red: #e90052;
     --white: #ffffff;
     --purple: #38003c;
+
+    --shadowLeft: -23px 0px 14px -32px rgba(0,0,0,0.75);
 }
 
 body {
