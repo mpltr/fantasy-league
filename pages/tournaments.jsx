@@ -13,7 +13,9 @@ const Tournaments = ({data}) => {
 
 Tournaments.getInitialProps = async (context) => {
 
-    const data = await fetch(`https://stormy-gorge-28890.herokuapp.com/get-tournaments`).then(res => res.json())
+    console.log(`${process.env.NEXT_PUBLIC_API}/get-tournaments`);
+
+    const data = await fetch(`${process.env.NEXT_PUBLIC_API}/get-tournaments`).then(res => res.json())
 
     return {
         data
