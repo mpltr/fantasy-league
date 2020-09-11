@@ -7,7 +7,11 @@
     --grey: #d8d8d8;
     --darkGrey: #6c6c6c;
     
-    --teal: #34bcb9;
+    --teal: #00ff85;
+    --blue: #04f5ff;
+    --red: #e90052;
+    --white: #ffffff;
+    --purple: #38003c;
 }
 
 body {

@@ -6,24 +6,25 @@ class Table extends Component {
         descending: true
     }
 
+    sortLookup = {
+        p: 'played',
+        w: 'win',
+        d: 'draw',
+        l: 'loss',
+        pf: 'for',
+        pa: 'against',
+        pd: 'gd',
+        pts: 'points'
+    }
+
     setSort(e) {
         const newSortBy = e.target.innerText.toLowerCase()
-        const sortLookup = {
-            p: 'played',
-            w: 'win',
-            d: 'draw',
-            l: 'loss',
-            pf: 'for',
-            pa: 'against',
-            pd: 'gd',
-            pts: 'points'
-        }
         
         // change sort type if already sorted by new sort by
-        if (this.state.sortBy === sortLookup[newSortBy]) {
+        if (this.state.sortBy === this.sortLookup[newSortBy]) {
             this.setState({ descending: !this.state.descending })    
         } else {
-            this.setState({sortBy: sortLookup[newSortBy]})
+            this.setState({sortBy: this.sortLookup[newSortBy]})
         }
 
     }
@@ -36,7 +37,7 @@ class Table extends Component {
             const bSecondary = this.props.players[b].gd || 0
             if(aPrimary == bPrimary) return this.state.descending ? bSecondary - aSecondary : aSecondary - bSecondary;
             return this.state.descending ? bPrimary - aPrimary : aPrimary - bPrimary;
-        }).map((playerId, i) => {
+        }).map((playerId, i) => { 
             return (
                 <tr className="row" key={i}>
                     <td className="cell">{this.props.players[playerId].name}</td>
@@ -59,7 +60,7 @@ class Table extends Component {
                             text-align: left;
                         }
                         .row:nth-child(${this.props.numberOfGroupTeamsToProgress}) td {
-                            border-bottom: 1px dashed var(--grey);
+                            border-bottom: ${this.state.sortBy === 'points' && this.state.descending ? '1px dashed var(--grey)' : 'none'};
                         }
                         @media (max-width: 567px) {
                             .no-mobile {
@@ -79,8 +80,7 @@ class Table extends Component {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th onClick={(e) => this.setSort(e)}
-                                className="header-cell">
+                            <th className="header-cell">
                                 
                             </th>
                             <th onClick={(e) => this.setSort(e)}
@@ -129,6 +129,7 @@ class Table extends Component {
                         .table {
                             width: 100%;
                             margin-top: 52px;
+                            user-select: none;
                         }
                         .header-cell {
                             font-weight: bold;
