@@ -1,7 +1,7 @@
 import React, {useState, useCallback} from 'react'
 import Fixtures from '../../../components/Fixtures'
-import Tabs from '../../../components/Tabs'
 import fetch from 'isomorphic-fetch'
+import CustomLink from '../../../components/CustomLink';
 
 const UpdateScores = (props) => {
     // create state from props
@@ -32,6 +32,7 @@ const UpdateScores = (props) => {
         <div className="container">
             <div className="header">
                 <h1>{props.name}</h1>
+                <CustomLink url={`/tournaments/${props.uid}`} label="Tournament Home" target="_blank"/> 
                 <button onClick={submitToApi}>Update Scores</button>
             </div>
             <Fixtures fixtures={fixtures} 
@@ -72,6 +73,7 @@ UpdateScores.getInitialProps = async (context) => {
 
     return {
         id: data.id,
+        uid: uid, 
         name: data.name, 
         players: data.players,
         tables: data.tables,

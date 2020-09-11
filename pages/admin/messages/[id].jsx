@@ -2,14 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 const Messages = (props) => {
+
+    const message = () => {
+        return (
+            <div>
+                <input type="text" placeholder="Title"/>
+                <input type="date" />
+                <input type="date" />
+                <textarea cols="30" rows="10"></textarea>
+                <button>Submit</button>
+            </div>
+        )
+    }
+
     return (
         <>
-        hello
-            {/* {props.messages.map(message => {
-                <input type="date"/>
-                <input type="text"/>
-                <textarea name="" id="" cols="30" rows="10"></textarea>
-            })} */}
+            {message()}
         </>
     )
 }
