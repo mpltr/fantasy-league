@@ -64,6 +64,7 @@ class Fixtures extends Component {
         return (
             <>
                 <input  className="score"
+                        type="number"
                         value={score || ""}
                         onChange={e => {
                             const newFixtures = {...this.props.fixtures}
