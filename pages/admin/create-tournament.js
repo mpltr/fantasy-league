@@ -26,9 +26,6 @@ class CreateTournament extends Component {
 
     createTournament = () => {
 
-        console.log(this.state.newPlayers.length);
-        console.log(this.state.numberOfPlayers);
-       
         //  TODO: better validation 
         if(
             this.state.tournamentName
@@ -45,7 +42,7 @@ class CreateTournament extends Component {
         ) {
             let formData = new URLSearchParams();
             formData.append('data', JSON.stringify(this.state));
-            fetch('https://stormy-gorge-28890.herokuapp.com/createTournament', {
+            fetch(`${process.env.NEXT_PUBLIC_API}/createTournament`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',

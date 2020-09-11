@@ -62,7 +62,7 @@ const Tournament = (props) => {
 Tournament.getInitialProps = async (context) => {
 
     const uid = context.query.id;
-    const data = await fetch(`https://stormy-gorge-28890.herokuapp.com/get-tournament/${uid}`).then(res => res.json());
+    const data = await fetch(`${process.env.NEXT_PUBLIC_API}/get-tournament/${uid}`).then(res => res.json());
 
     return {
         name: data.name, 

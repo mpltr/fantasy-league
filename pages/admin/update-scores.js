@@ -20,7 +20,7 @@ const UpdateScores = (props) => {
             id: props.id
         }));
 
-        fetch('https://stormy-gorge-28890.herokuapp.com/updateFixtures', {
+        fetch(`${process.env.NEXT_PUBLIC_API}/updateFixtures`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -62,7 +62,7 @@ const UpdateScores = (props) => {
 UpdateScores.getInitialProps = async (context) => {
 
     const uid = context.query.tournamentId
-    const data = await fetch(`https://stormy-gorge-28890.herokuapp.com/get-tournament/${uid}`).then(res => res.json())
+    const data = await fetch(`${process.env.NEXT_PUBLIC_API}/get-tournament/${uid}`).then(res => res.json())
 
     // merge fixtures
     const mergedFixtures =  {}
