@@ -7,7 +7,7 @@ import Fixtures from '../../components/Fixtures'
 const Tournament = (props) => {
     return ( 
         <div className="container">
-            <h1>{props.name}</h1>
+            <h1>{`FPL Cup ${props.name}`}</h1>
             <Tabs>
                 <Tabs tabtitle="Groups">
                     {props.tables && Object.keys(props.tables).map((key, i) => {

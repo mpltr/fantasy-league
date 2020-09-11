@@ -64,7 +64,7 @@ class CreateTournament extends Component {
         return (
             <div>
                 <h2>Tournament Settings</h2>
-                <label for="tournamentName">Tournament Name</label>
+                <label for="tournamentName">Season (XXXX/XX)</label>
                 <input name="tournamentName"
                        value={this.state.tournamentName}
                        onChange={(e) => this.setState({tournamentName: e.target.value})}
