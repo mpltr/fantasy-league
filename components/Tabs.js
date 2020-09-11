@@ -10,7 +10,7 @@ const Tabs = (props) => {
                 {children.filter(child => child !== undefined).map((child, index) => {
                     return (
                         <button key={index} 
-                                className={tab === index ? 'tab tab-active' : 'tab' }
+                                className={tab === index ? `tab tab-${props.color}` : 'tab' }
                                 onClick={() => setTab(index)}>
                             {child.props.tabtitle ?? 'Set Tab Title'}
                         </button>
@@ -50,22 +50,19 @@ const Tabs = (props) => {
                     font-size: 11px;
                     color: grey;
                     white-space: nowrap;
+                    user-select: none;
                 }
-                .tab:after {
-                    content: "";
-                    position: absolute;
-                    width: 1px;
-                    height: 70%;
-                    top: 15%;
-                    right: 0;
-                    background-color: var(--lightGreyAlt);
-                }
-                .tab:last-child:after {
-                    display: none;
-                }
-                .tab-active {
-                    background-color: var(--teal);
+                .tab-red {
+                    background-color: var(--red);
                     color: #fff;
+                }
+                .tab-purple {
+                    background-color: var(--purple);
+                    color: #fff;
+                }
+                .tab-teal {
+                    background-color: var(--teal);
+                    color: var(--purple);
                 }
                 .tab-active:after {
                     display: none;

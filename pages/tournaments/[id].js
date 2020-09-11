@@ -8,12 +8,12 @@ const Tournament = (props) => {
     return ( 
         <div className="container">
             <h1>{`FPL Cup ${props.name}`}</h1>
-            <Tabs>
-                <Tabs tabtitle="Groups">
+            <Tabs color="purple">
+                <Tabs tabtitle="Groups" color="red">
                     {props.tables && Object.keys(props.tables).map((key, i) => {
                         return (
                             <div key={i} tabtitle={`Group  ${key}`} >
-                                <Tabs>
+                                <Tabs color="teal">
                                     <Table tabtitle="Table"
                                             players={props.players}
                                             tablePlayerIds={props.tables[key]}
@@ -30,7 +30,7 @@ const Tournament = (props) => {
                     })}
                 </Tabs>
                 { props.fixtures['Last 16'] &&
-                    <Tabs tabtitle="Knockouts" test={true} >
+                    <Tabs tabtitle="Knockouts" test={true} color="red">
                         <Fixtures tabtitle="Last 16"
                                   fixtures={props.fixtures['Last 16']}
                                   players={props.players}>
@@ -38,7 +38,7 @@ const Tournament = (props) => {
                         {/* <div></div> */}
                     </Tabs>
                 }
-                <Tabs tabtitle="Stats">
+                <Tabs tabtitle="Stats" color="red">
                     <Table tabtitle="Overall Table"
                             players={props.players}
                             tablePlayerIds={Object.keys(props.players).map(playerId => playerId)}
