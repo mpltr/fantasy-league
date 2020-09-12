@@ -49,8 +49,8 @@ class Fixtures extends Component {
                 <style jsx>{`
                     .score {
                         width: 40px;
-                        color: var(--darkGrey);
-                        background-color: var(--lightGrey);
+                        color: ${ score ? 'var(--white)' : 'var(--darkGrey)'};
+                        background-color: ${ score ? 'var(--blue)' : 'var(--lightGrey)'};
                         margin: 0 1px;
                         padding: 4px;
                         text-align: center;

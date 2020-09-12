@@ -65,7 +65,12 @@ const Tabs = (props) => {
                 }
                 .tab-teal {
                     background-color: var(--teal);
-                    color: #fff;
+                    color: var(--white);
+                    font-weight: bold;
+                }
+                .tab-blue {
+                    background-color: var(--blue);
+                    color: var(--darkGrey);
                     font-weight: bold;
                 }
                 .tab-active:after {
