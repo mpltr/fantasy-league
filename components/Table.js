@@ -7,26 +7,36 @@ class Table extends Component {
     }
 
     sortLookup = {
-        p: 'played',
-        w: 'win',
-        d: 'draw',
-        l: 'loss',
-        pf: 'for',
-        pa: 'against',
-        pd: 'gd',
-        pts: 'points'
+        P: {name: "played"},
+        W: {name: 'win', noMobile: true},
+        D: {name: 'draw', noMobile: true},
+        L: {name: 'loss', noMobile: true},
+        PF: {name: 'for', noMobile: true},
+        PA: {name: 'against', noMobile: true},
+        PD: {name: 'gd'},
+        PTS: {name: 'points'}
     }
 
     setSort(e) {
-        const newSortBy = e.target.innerText.toLowerCase()
-        
+        const newSortBy = e.target.innerText
+
         // change sort type if already sorted by new sort by
-        if (this.state.sortBy === this.sortLookup[newSortBy]) {
+        if (this.state.sortBy === this.sortLookup[newSortBy].name) {
             this.setState({ descending: !this.state.descending })    
         } else {
-            this.setState({sortBy: this.sortLookup[newSortBy]})
+            this.setState({sortBy: this.sortLookup[newSortBy].name})
         }
 
+    }
+
+    headerClass(key) {
+        let headerClass = "header-cell";
+        if(this.sortLookup[key].noMobile) headerClass = headerClass + ' no-mobile';
+        if(this.sortLookup[key].name === this.state.sortBy) {
+            const sortClass = this.state.descending ? ' header-cell--desc' : ' header-cell--asc';
+            headerClass = headerClass + sortClass;
+        }
+        return headerClass
     }
 
     renderPlayers() {
@@ -80,40 +90,16 @@ class Table extends Component {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th className="header-cell header-cell--player">
-                            </th>
-                            <th onClick={(e) => this.setSort(e)}
-                                className="header-cell">
-                                P
-                            </th>
-                            <th onClick={(e) => this.setSort(e)}
-                                className="header-cell no-mobile">
-                                W
-                            </th>
-                            <th onClick={(e) => this.setSort(e)}
-                                className="header-cell no-mobile">
-                                D
-                            </th>
-                            <th onClick={(e) => this.setSort(e)}
-                                className="header-cell no-mobile">
-                                L
-                            </th>
-                            <th onClick={(e) => this.setSort(e)}
-                                className="header-cell no-mobile">
-                                PF
-                            </th>
-                            <th onClick={(e) => this.setSort(e)}
-                                className="header-cell no-mobile">
-                                PA
-                            </th>
-                            <th onClick={(e) => this.setSort(e)}
-                                className="header-cell">
-                                PD
-                            </th>
-                            <th onClick={(e) => this.setSort(e)}
-                                className="header-cell">
-                                PTS
-                            </th>
+                            <th className="header-cell header-cell--player"></th>
+                            {Object.keys(this.sortLookup).map(key => {
+                                return(
+                                    <th onClick={(e) => this.setSort(e)}
+                                        className={this.headerClass(key)}
+                                        key={key}>
+                                        {key}
+                                    </th>
+                                )
+                            })}
                         </tr>
                     </thead>
                     <tbody>
@@ -129,11 +115,12 @@ class Table extends Component {
                             width: 100%;
                             margin-top: 52px;
                             user-select: none;
+                            table-layout: fixed;
                         }
                         .header-cell {
                             font-weight: bold;
                             margin: 0;
-                            width: 10%;
+                            width: 8%;
                             text-align: center;
                             color: var(--darkGrey);
                             padding: 8px 0 8px 8px;
@@ -146,6 +133,15 @@ class Table extends Component {
                         .header-cell--player {
                             min-width: 115px;
                         }
+                       
+                        .header-cell--desc::after {
+                            content: "▼";
+                            font-size: 8px;
+                        }
+                        .header-cell--asc::after {
+                            content: "▲";
+                            font-size: 8px;
+                        }
                         .test {
                             text-align: center;
                             background-color: red;
@@ -156,6 +152,9 @@ class Table extends Component {
                         @media (max-width: 567px) {
                             .table {
                                 margin-top: 16px;
+                            }
+                            .cell {
+                                width: 15px;
                             }
                             .no-mobile {
                                 display: none;
