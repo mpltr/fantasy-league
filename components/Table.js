@@ -80,8 +80,7 @@ class Table extends Component {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th className="header-cell">
-                                
+                            <th className="header-cell header-cell--player">
                             </th>
                             <th onClick={(e) => this.setSort(e)}
                                 className="header-cell">
@@ -143,6 +142,9 @@ class Table extends Component {
                         .header-cell:first-child {
                             width: 20%;
                             text-align: left;
+                        }
+                        .header-cell--player {
+                            min-width: 115px;
                         }
                         .test {
                             text-align: center;
