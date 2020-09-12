@@ -1,16 +1,23 @@
-import React, {Component, useState} from 'react'
-import { withRedux } from '../lib/redux'
+import React from 'react'
+import CustomLink from '../components/CustomLink';
 
-const IndexPage = (props) => {
-  return ( 
-    'TODO: Home page layout. API required to access tournaments'
-  );
+const Index = ({data}) => {
+    return (
+        <div>
+            {data.map(tournament => {
+                return <CustomLink url={`/${tournament.uid}`} label={tournament.uid} key={tournament.uid}/>
+            })}
+        </div>
+    )
 }
 
-// IndexPage.getInitialProps = ({ reduxStore }) => {
-//   // Tick the time once, so we'll have a
-//   // valid time before first render
-//   return {}
-// }
+Index.getInitialProps = async (context) => {
 
-export default withRedux(IndexPage)
+    const data = await fetch(`${process.env.NEXT_PUBLIC_API}/tournament`).then(res => res.json())
+
+    return {
+        data
+    }
+
+}
+export default Index
