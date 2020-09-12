@@ -134,6 +134,9 @@ class Fixtures extends Component {
                             width: calc(50% - 42px);
                             padding: 4px 8px;
                             color: var(--darkGrey);
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
                         }
 
                         .home {
