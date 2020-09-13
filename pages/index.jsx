@@ -1,5 +1,6 @@
 import React from 'react'
 import CustomLink from '../components/CustomLink';
+import fetch from 'isomorphic-fetch'
 
 const Index = ({data}) => {
     return (
@@ -16,6 +17,7 @@ Index.getInitialProps = async (context) => {
     const data = await fetch(`${process.env.NEXT_PUBLIC_API}/tournament`).then(res => res.json())
 
     return {
+        ...context.intialState, 
         data
     }
 

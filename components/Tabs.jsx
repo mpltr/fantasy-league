@@ -29,6 +29,7 @@ const Tabs = (props) => {
             </div>
             <style jsx>{`
                 .wrapper {
+                    position: relative;
                 }
                 
                 .header {

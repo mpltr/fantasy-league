@@ -51,10 +51,6 @@ const Tournament = (props) => {
                 
             </Tabs>
             <style jsx>{`
-                .container {
-                    max-width: 800px;
-                    margin: auto;
-                }
                 .header {
                     display: flex;
                     justify-content: space-between;
