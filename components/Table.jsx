@@ -24,6 +24,7 @@ class Table extends Component {
         if (this.state.sortBy === this.sortLookup[newSortBy].name) {
             this.setState({ descending: !this.state.descending })    
         } else {
+            this.setState({descending: true});
             this.setState({sortBy: this.sortLookup[newSortBy].name})
         }
 
