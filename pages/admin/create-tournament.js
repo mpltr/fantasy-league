@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import NewPlayer from '../../components/NewPlayer';
-import Router from 'next/router';
+import React, { Component } from 'react'
+import NewPlayer from '../../components/NewPlayer'
+import Router from 'next/router'
+import fetch from 'isomorphic-fetch'
 
 class CreateTournament extends Component {
     state = {
