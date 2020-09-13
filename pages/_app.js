@@ -5,7 +5,7 @@ import App from 'next/app'
 import fetch from 'isomorphic-fetch'
 
 // This default export is required in a new `pages/_app.js` file.
-function MyApp({ Component, pageProps, tournaments }) {
+function MyApp({ Component, pageProps, tournaments}) {
   return (
     <>
       <Head>
@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps, tournaments }) {
         <meta name="viewport" content="width=device-width"></meta>
       </Head>
       <Nav tournaments={tournaments}/>
-      <Component {...pageProps} />
+      <Component {...pageProps} tournaments={tournaments}/>
     </>
   )
 }

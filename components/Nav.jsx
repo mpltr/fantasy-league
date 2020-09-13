@@ -20,13 +20,13 @@ const Nav = ({tournaments}) => {
         {
             'title': 'Seasons',
             'subitems': tournaments.map(tournament => {
-                            const {uid, tournamentName} = tournament
-                            return {
-                                title: tournamentName,
-                                href: `/${uid}`
-                            }
-                        })
-        }
+                const {uid, tournamentName} = tournament
+                return {
+                    title: tournamentName,
+                    href: `/${uid}`
+                }
+            })
+}
     ];
 
     return (
