@@ -1,10 +1,14 @@
 import React from 'react'
 import CustomLink from '../components/CustomLink';
 import fetch from 'isomorphic-fetch'
+import Head from 'next/head'
 
 const Index = ({data}) => {
     return (
         <div>
+            <Head>
+                <title>FPL Cup</title>
+            </Head>
             {data.map(tournament => {
                 return <CustomLink url={`/${tournament.uid}`} label={tournament.uid} key={tournament.uid}/>
             })}
