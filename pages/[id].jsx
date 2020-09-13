@@ -4,12 +4,17 @@ import Table from '../components/Table'
 import fetch from 'isomorphic-fetch'
 import Fixtures from '../components/Fixtures'
 import Message from '../components/Message'
+import Head from 'next/head'
 
 const Tournament = (props) => {
+    const title = `FPL Cup ${props.name}`
     return ( 
         <div className="container">
+            <Head>
+                <title>{title}</title>
+            </Head>
             <div className="header">
-                <h1>{`FPL Cup ${props.name}`}</h1>
+                <h1>{title}</h1>
                 <Message updates={props.updates}/>
             </div>
             <Tabs color="purple">

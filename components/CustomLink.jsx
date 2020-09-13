@@ -7,9 +7,6 @@ const CustomLink = ({href,  children, target='_self'}) => {
             <Link href={href}>
                 <a target={target} onClick={e => e.stopPropagation()}>
                     {children}
-                    <style jsx>{`
-                      
-                    `}</style>
                 </a>
                     
             </Link>
