@@ -2,7 +2,7 @@ import './styles.css'
 import Head from "next/head"
 import Nav from "../components/Nav"
 import App from 'next/app'
-import fetch from 'isomorphic-fetch'
+import fetch from 'isomorphic-unfetch'
 
 // This default export is required in a new `pages/_app.js` file.
 function MyApp({ Component, pageProps, tournaments}) {
