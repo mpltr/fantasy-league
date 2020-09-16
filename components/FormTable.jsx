@@ -30,7 +30,7 @@ const FormTable = ({players}) => {
     }
 
     return (
-        <div>
+        <>
             <table className="table table--form">
                 <thead>
                     <tr>
@@ -81,7 +81,7 @@ const FormTable = ({players}) => {
                     color: var(--darkGrey);
                 }
             `}</style>
-        </div>
+        </>
     )
 }
 export default FormTable

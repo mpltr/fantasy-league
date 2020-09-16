@@ -75,11 +75,9 @@ h1 {
 }
 .table--form {
     max-width: 320px;
-    margin: auto;
+    margin: 50px auto 0;
 }
-.table--form  * {
-    /* border: 1px solid grey; */
-}
+
 .header-cell {
     font-weight: bold;
     margin: 0;
