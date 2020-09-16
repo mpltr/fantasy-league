@@ -4,6 +4,7 @@ import Table from '../components/Table'
 import fetch from 'isomorphic-unfetch'
 import Fixtures from '../components/Fixtures'
 import Message from '../components/Message'
+import FormTable from '../components/FormTable'
 import Head from 'next/head'
 
 const Tournament = (props) => {
@@ -52,6 +53,9 @@ const Tournament = (props) => {
                             players={props.players}
                             tablePlayerIds={Object.keys(props.players).map(playerId => playerId)}
                     ></Table>
+                    <FormTable tabtitle="Form" players={props.players}>
+
+                    </FormTable>
                 </Tabs>
                 
             </Tabs>
