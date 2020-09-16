@@ -61,22 +61,8 @@ class Table extends Component {
                     <td className="cell">{this.props.players[playerId].gd || 0}</td>
                     <td className="cell">{this.props.players[playerId].points || 0}</td>
                     <style jsx>{`
-                        .cell {
-                            text-align: center;
-                            color: var(--darkGrey);
-                            padding: 5px 0 9px 8px;
-                            font-size: 13px;
-                        }
-                        .cell:first-child {
-                            text-align: left;
-                        }
                         .row:nth-child(${this.props.numberOfGroupTeamsToProgress}) td {
                             border-bottom: ${this.state.sortBy === 'points' && this.state.descending ? '1px dashed var(--grey)' : 'none'};
-                        }
-                        @media (max-width: 567px) {
-                            .no-mobile {
-                                display: none;
-                            }
                         }
                     `}
                     </style>
@@ -109,63 +95,7 @@ class Table extends Component {
                 </table>
                 <div className="rotate">Rotate for more info</div>
                 <style jsx>{`
-                        * {
-                            // border: 1px solid grey;
-                        }
-                        .table {
-                            width: 100%;
-                            margin-top: 52px;
-                            user-select: none;
-                            table-layout: fixed;
-                        }
-                        .header-cell {
-                            font-weight: bold;
-                            margin: 0;
-                            width: 8%;
-                            text-align: center;
-                            color: var(--darkGrey);
-                            padding: 8px 0 8px 8px;
-                            cursor: pointer;
-                        }
-                        .header-cell:first-child {
-                            width: 20%;
-                            text-align: left;
-                        }
-                        .header-cell--player {
-                            min-width: 115px;
-                        }
-                       
-                        .header-cell--desc::after {
-                            content: "▼";
-                            font-size: 8px;
-                        }
-                        .header-cell--asc::after {
-                            content: "▲";
-                            font-size: 8px;
-                        }
-                        .test {
-                            text-align: center;
-                            background-color: red;
-                        }
-                        .rotate {
-                            display: none;
-                        }
-                        @media (max-width: 567px) {
-                            .table {
-                                margin-top: 16px;
-                            }
-                            .cell {
-                                width: 15px;
-                            }
-                            .no-mobile {
-                                display: none;
-                            }
-                            .rotate {
-                                display: block;
-                                text-align: center;
-                                margin-top: 32px;
-                            }
-                        }
+                    
                     `}
                 </style>
             </>
