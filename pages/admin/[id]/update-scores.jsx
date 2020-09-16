@@ -1,6 +1,6 @@
 import React, {useState, useCallback} from 'react'
 import Fixtures from '../../../components/Fixtures'
-import fetch from 'isomorphic-fetch'
+import fetch from 'isomorphic-unfetch'
 import CustomLink from '../../../components/CustomLink';
 
 const UpdateScores = (props) => {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import NewPlayer from '../../components/NewPlayer'
 import Router from 'next/router'
-import fetch from 'isomorphic-fetch'
+import fetch from 'isomorphic-unfetch'
 
 class CreateTournament extends Component {
     state = {

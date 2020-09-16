@@ -12,7 +12,7 @@ const Index = ({tournaments}) => {
             {tournaments.map(tournament => {
                 const uid = tournament.uid;
                 return (
-                    <CustomLink href={`/${uid}`}>
+                    <CustomLink href={`/${uid}`} key={uid}>
                         <Card tournament={tournament}/>
                     </CustomLink>
                 )
