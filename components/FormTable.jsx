@@ -47,9 +47,9 @@ const FormTable = ({players}) => {
                             <tr className="row" key={playerId}>
                                 <td className="cell">{name}</td>
                                 <td className="cell cell--right">
-                                    {form.map(result => {
+                                    {form.map((result, key) => {
                                         const letter = resultLookup[result]
-                                        return <span className={`result ${letter}`}>{letter}</span>
+                                        return <span className={`result ${letter}`} key={key}>{letter}</span>
                                     })}
                                 </td>
                             </tr>
