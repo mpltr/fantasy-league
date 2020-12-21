@@ -6,6 +6,7 @@ import Fixtures from '../components/Fixtures'
 import Message from '../components/Message'
 import FormTable from '../components/FormTable'
 import Head from 'next/head'
+import get from '../lib/api'
 
 const Tournament = (props) => {
     const title = `FPL Cup ${props.name}`
@@ -76,7 +77,7 @@ const Tournament = (props) => {
 Tournament.getInitialProps = async (context) => {
 
     const uid = context.query.id;
-    const {name, numberOfGroupTeamsToProgress, players, tables, fixtures, knockout, updates} = await fetch(`${process.env.NEXT_PUBLIC_API}/tournament/${uid}`).then(res => res.json());
+    const {name, numberOfGroupTeamsToProgress, players, tables, fixtures, knockout, updates} = await get({endpoint: `/tournament/${uid}`})
 
     return {
         name,
