@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import NewPlayer from '../../components/NewPlayer'
 import Router from 'next/router'
-import fetch from 'isomorphic-unfetch'
+import { post } from '../../lib/api'
 
 class CreateTournament extends Component {
     state = {
@@ -41,16 +41,12 @@ class CreateTournament extends Component {
                 return player.hasOwnProperty('name');
             })         
         ) {
-            let formData = new URLSearchParams();
-            formData.append('data', JSON.stringify(this.state));
-            fetch(`${process.env.NEXT_PUBLIC_API}/tournament`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: formData
+            post({
+                endpoint: 'tournament',
+                params: this.state
             }).then(res => res.json()).then((response) => {
-                Router.push(`/tournaments/${response.tournamentUid}`);
+                console.log(response)
+                // Router.push(`/tournaments/${response.tournamentUid}`);
             }).catch(err => {
                 console.error(err);
             })

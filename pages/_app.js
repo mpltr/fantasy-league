@@ -3,6 +3,7 @@ import Head from "next/head"
 import Nav from "../components/Nav"
 import App from 'next/app'
 import fetch from 'isomorphic-unfetch'
+import get from '../lib/api'
 
 // This default export is required in a new `pages/_app.js` file.
 function MyApp({ Component, pageProps, tournaments}) {
@@ -26,7 +27,7 @@ function MyApp({ Component, pageProps, tournaments}) {
 
 MyApp.getInitialProps = async (context) => {
   const appProps = await App.getInitialProps(context)
-  const tournaments = await fetch(`${process.env.NEXT_PUBLIC_API}/tournament`).then(res => res.json());
+  const tournaments = await get({endpoint: 'tournament'})
   return {
     ...appProps, 
     tournaments

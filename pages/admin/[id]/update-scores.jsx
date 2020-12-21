@@ -2,24 +2,20 @@ import React, {useState, useCallback} from 'react'
 import Fixtures from '../../../components/Fixtures'
 import fetch from 'isomorphic-unfetch'
 import CustomLink from '../../../components/CustomLink';
+import { get, post } from '../../../lib/api'
 
 const UpdateScores = (props) => {
     // create state from props
     const [fixtures, updateFixtures] = useState(props.fixtures)
+
     const submitToApi = useCallback(() => {
 
-        let formData = new URLSearchParams()
-        formData.append('data', JSON.stringify({
-            fixtures: fixtures, 
-            id: props.id
-        }));
-
-        fetch(`${process.env.NEXT_PUBLIC_API}/fixtures`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: formData
+        post({
+            endpoint: 'fixtures',
+            params: {
+                fixtures: fixtures, 
+                id: props.id
+            }
         }).then(res => res.json()).then(response => {
             const message = response.status ? response.message : response.error
             alert(message)
@@ -28,6 +24,7 @@ const UpdateScores = (props) => {
         })
 
     })
+    
     return ( 
         <div className="container">
             <div className="header">
@@ -57,7 +54,7 @@ const UpdateScores = (props) => {
 UpdateScores.getInitialProps = async (context) => {
 
     const uid = context.query.id
-    const data = await fetch(`${process.env.NEXT_PUBLIC_API}/tournament/${uid}`).then(res => res.json())
+    const data = await get({endpoint: `/tournament/${uid}`})
 
     // merge fixtures
     const mergedFixtures =  {}
