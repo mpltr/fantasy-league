@@ -4,6 +4,7 @@ const Card = ({tournament}) => {
     
     const {numberOfGroups, 
            numberOfKnockoutRounds, 
+           stage,
            startDate, 
            tournamentName, 
            weeksBetweenFixtures} = tournament;
@@ -12,6 +13,7 @@ const Card = ({tournament}) => {
         <div>
             <span className="span">{`Season: ${tournamentName}`}</span>
             <span className="span">{`Start Date: ${startDate}`}</span>
+            <span className="span">{`Stage: ${stage}`}</span>
             <span className="span">{`Weeks between fixtures: ${weeksBetweenFixtures}`}</span>
             <span className="span">{`No Groups: ${numberOfGroups}`}</span>
             <span className="span">{`No Knockout Rounds: ${numberOfKnockoutRounds}`}</span>

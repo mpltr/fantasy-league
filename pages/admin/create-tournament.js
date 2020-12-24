@@ -7,12 +7,12 @@ class CreateTournament extends Component {
     state = {
         screen: 0,
         tournamentName: '',
-        numberOfPlayers: 2,
-        numberOfGroups: 1,
+        numberOfPlayers: 60,
+        numberOfGroups: 4,
         startDate: '',
         numberOfPvpFixtures: 1,
-        weeksBetweenFixtures: 3,
-        numberOfKnockoutRounds: 1,
+        weeksBetweenFixtures: 2,
+        numberOfKnockoutRounds: 5,
         newPlayers: []
     }
 
@@ -45,8 +45,7 @@ class CreateTournament extends Component {
                 endpoint: 'tournament',
                 params: this.state
             }).then(res => res.json()).then((response) => {
-                console.log(response)
-                // Router.push(`/tournaments/${response.tournamentUid}`);
+                Router.push(`/${response.tournamentUid}`);
             }).catch(err => {
                 console.error(err);
             })
@@ -61,18 +60,18 @@ class CreateTournament extends Component {
         return (
             <div>
                 <h2>Tournament Settings</h2>
-                <label for="tournamentName">Season (XXXX/XX)</label>
+                <label htmlFor="tournamentName">Season (XXXX/XX)</label>
                 <input name="tournamentName"
                        value={this.state.tournamentName}
                        onChange={(e) => this.setState({tournamentName: e.target.value})}
                        ></input>
-                <label for="startDate">Start Date</label>
+                <label htmlFor="startDate">Start Date</label>
                 <input name="startDate"
                     type="date"
                     value={this.state.startDate}
                     onChange={(e) => this.setState({ startDate: e.target.value })}
                 ></input>
-                <label for="numberOfPlayers">Number of Players</label>
+                <label htmlFor="numberOfPlayers">Number of Players</label>
                 <input name="numberOfPlayers" 
                        type="number" 
                        value={this.state.numberOfPlayers}
@@ -80,16 +79,14 @@ class CreateTournament extends Component {
                        max="56"
                        onChange={(e) => this.setState({numberOfPlayers: e.target.value})}
                        ></input>
-                <label for="numberOfGroups">Number of Groups</label>
+                <label htmlFor="numberOfGroups">Number of Groups</label>
                 <select name="numberOfGroups"
                         onChange={(e) => this.setState({ numberOfGroups: e.target.value })}
+                        value={this.state.numberOfGroups}
                 >
-                    <option value="1" selected={this.state.numberOfGroups == 1 ? 'selected' : ''}>1</option>
-                    <option value="2" selected={this.state.numberOfGroups == 2 ? 'selected' : ''}>2</option>
-                    <option value="4" selected={this.state.numberOfGroups == 4 ? 'selected' : ''}>4</option>
-                    <option value="8" selected={this.state.numberOfGroups == 8 ? 'selected' : ''}>8</option>
+                    <option value="4">4</option>
                 </select>
-                <label for="numberOfPvpFixtures">Number of Times to play each player in group</label>
+                <label htmlFor="numberOfPvpFixtures">Number of Times to play each player in group</label>
                 <input name="numberOfPvpFixtures"
                        type="number"
                        value={this.state.numberOfPvpFixtures}
@@ -97,7 +94,7 @@ class CreateTournament extends Component {
                        max="4"
                        onChange={(e) => this.setState({ numberOfPvpFixtures: e.target.value })}
                 ></input>
-                <label for="weeksBetweenFixtures">Weeks between fixtures</label>
+                <label htmlFor="weeksBetweenFixtures">Weeks between fixtures</label>
                 <input name="weeksBetweenFixtures"
                        type="number"
                        value={this.state.weeksBetweenFixtures}
@@ -105,14 +102,13 @@ class CreateTournament extends Component {
                        max="10"
                        onChange={(e) => this.setState({ weeksBetweenFixtures: e.target.value })}
                 ></input>
-                <label for="numberOfKnockoutRounds">Number of Knockout Rounds</label>
-                <input name="numberOfKnockoutRounds"
-                        type="number"
-                        value={this.state.numberOfKnockoutRounds}
-                        min="1"
-                        max="6"
+                <label htmlFor="numberOfKnockoutRounds">Number of Knockout Rounds</label>
+                <select name="numberOfKnockoutRounds"
                         onChange={(e) => this.setState({ numberOfKnockoutRounds: e.target.value })}
-                ></input>
+                        value={this.state.numberOfKnockoutRounds}
+                >
+                        <option value="5">5 (last 32)</option>
+                </select>
                 <style jsx>{`
                         input, select {
                             text-align: left;
