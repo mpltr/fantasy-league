@@ -40,13 +40,40 @@ const Tournament = (props) => {
                         );
                     })}
                 </Tabs>
-                { props.fixtures['Last 16'] &&
+                { props.fixtures['Last 32'] &&
                     <Tabs tabtitle="Knockouts" test={true} color="red">
-                        <Fixtures tabtitle="Last 16"
-                                  fixtures={props.fixtures['Last 16']}
+                        <Fixtures tabtitle="Last 32"
+                                  fixtures={props.fixtures['Last 32']}
                                   players={props.players}>
                         </Fixtures>
-                        {/* <div></div> */}
+                        { 
+                            props.fixtures['Last 16'] &&
+                                <Fixtures tabtitle="Last 16"
+                                    fixtures={props.fixtures['Last 16']}
+                                    players={props.players}>
+                                </Fixtures>
+                        }
+                        {
+                             props.fixtures['Quarter Finals'] &&
+                                <Fixtures tabtitle="Quarter Finals"
+                                    fixtures={props.fixtures['Quarter Finals']}
+                                    players={props.players}>
+                                </Fixtures>
+                        }
+                        {
+                             props.fixtures['Semi Finals'] &&
+                                <Fixtures tabtitle="Semi Finals"
+                                    fixtures={props.fixtures['Semi Finals']}
+                                    players={props.players}>
+                                </Fixtures>
+                        }
+                        {
+                             props.fixtures['Final'] &&
+                                <Fixtures tabtitle="Final"
+                                    fixtures={props.fixtures['Final']}
+                                    players={props.players}>
+                                </Fixtures>
+                        }
                     </Tabs>
                 }
                 <Tabs tabtitle="Stats" color="red">

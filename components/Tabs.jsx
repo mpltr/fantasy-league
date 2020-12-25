@@ -50,9 +50,9 @@ const Tabs = (props) => {
                     text-transform: uppercase;
                     font-size: 11px;
                     color: grey;
-                    white-space: nowrap;
                     user-select: none;
                     letter-spacing: 0.3px;
+                    min-width: 80px;
                 }
                 .tab-red {
                     background-color: var(--red);
