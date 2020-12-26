@@ -1,12 +1,17 @@
 import React, {useState, useCallback} from 'react'
 import Fixtures from '../../../components/Fixtures'
-import fetch from 'isomorphic-unfetch'
 import CustomLink from '../../../components/CustomLink';
 import { get, post, put } from '../../../lib/api'
+import { getClosestDate } from '../../../lib/date'
 
 const UpdateScores = (props) => {
     // create state from props
-    const [fixtures, updateFixtures] = useState(props.fixtures)
+    const [fixtures, updateFixtures] = useState(props.mergedFixtures)
+    const dates = Object.keys(fixtures);
+    const closestDate = getClosestDate(dates);
+    const [selectedDate, setSelectedDate] = useState(closestDate)
+    const selectedFixtures = {}
+    selectedFixtures[selectedDate] = fixtures[selectedDate]
 
     const submitToApi = useCallback(() => {
         post({
@@ -44,15 +49,34 @@ const UpdateScores = (props) => {
     return ( 
         <div className="container">
             <div className="header">
-                <h1>{props.name} ({props.stage} Stage)</h1>
+                <h1>{props.name} ({props.stage})</h1>
                 <CustomLink url={`/tournaments/${props.uid}`} label="Tournament Home" target="_blank"/> 
-                <button onClick={revertStage}>Revert to last stage</button>
+                {props.stage !== 'Group' && 
+                    <button onClick={revertStage}>Revert to last stage</button>
+                }
+                <select name="date" 
+                        value={selectedDate} 
+                        onChange={(e) => setSelectedDate(e.target.value)}>
+                    <option value="">Please Select</option>
+                    {Object.keys(fixtures).map((date, i) => {
+                        const firstFixture = fixtures[date][0];
+                        const stage = firstFixture['stage'];
+                        const text = stage !== 'Group' ? stage : `Matchweek ${i + 1}`;
+                        return <option value={date} key={date}>{text}</option>
+                    })}
+                </select>
                 <button onClick={submitToApi}>Update Scores</button>
             </div>
-            <Fixtures fixtures={fixtures} 
-                      players={props.players} 
-                      editmode={true}
-                      updateFixtures={updateFixtures}/>
+            {selectedDate && 
+                 <Fixtures fixtures={selectedFixtures} 
+                    players={props.players} 
+                    editmode={true}
+                    updateFixtures={updateFixtures}
+                    allFixtures={fixtures}
+                    setSelectedDate={setSelectedDate}
+                />
+            }
+           
             <style jsx>{`
                 .container {
                     max-width: 800px;
@@ -60,8 +84,18 @@ const UpdateScores = (props) => {
                 }
                 .header {
                     display: flex;
-                    justify-content: space-between;
+                    justify-content: flex-end;
                     align-items: center;
+                    height: 39px;
+                }
+
+                select {
+                    height: 100%;
+                    margin: 0 8px;
+                }
+                h1 {
+                    margin: 0;
+                    margin-right: auto;
                 }
             `}</style>
         </div>
@@ -91,7 +125,7 @@ UpdateScores.getInitialProps = async (context) => {
         name: data.name, 
         players: data.players,
         tables: data.tables,
-        fixtures: mergedFixtures,
+        fixtures: data.fixtures,
         mergedFixtures: mergedFixtures,
         stage: data.stage
     }
