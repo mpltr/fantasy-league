@@ -37,7 +37,7 @@ const Tabs = (props) => {
                     display: flex;
                     flex-wrap: wrap;
                     margin-bottom: 16px;
-                    border-radius: 4px;
+                    border-radius: 3px;
                     overflow: hidden;
                 }
                 .tab {
@@ -45,7 +45,7 @@ const Tabs = (props) => {
                     flex-grow: 1;
                     flex-basis: 10%;
                     border: none;
-                    background-color: #f0f0f0;
+                    background-color: var(--lightGrey);
                     padding: 16px 4px;
                     text-transform: uppercase;
                     font-size: 11px;

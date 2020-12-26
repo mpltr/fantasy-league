@@ -2,14 +2,13 @@ import React, {useState, useCallback} from 'react'
 import Fixtures from '../../../components/Fixtures'
 import fetch from 'isomorphic-unfetch'
 import CustomLink from '../../../components/CustomLink';
-import { get, post } from '../../../lib/api'
+import { get, post, put } from '../../../lib/api'
 
 const UpdateScores = (props) => {
     // create state from props
     const [fixtures, updateFixtures] = useState(props.fixtures)
 
     const submitToApi = useCallback(() => {
-
         post({
             endpoint: 'fixtures',
             params: {
@@ -19,17 +18,35 @@ const UpdateScores = (props) => {
         }).then(res => res.json()).then(response => {
             const message = response.status ? response.message : response.error
             alert(message)
+            location.reload()
         }).catch(err => {
             console.error(err)
         })
 
     })
+
+    const revertStage = useCallback(() => {
+        const proceed = confirm(`WARNING: This will delete all fixtures and results for the ${props.stage}! Do you want to continue?`);
+
+        if(proceed) {
+            put({
+                endpoint: `tournament/revert/${props.uid}`
+            }).then(res => res.json()).then(response => {
+                const message = response.status ? response.message : response.error
+                alert(message)
+                location.reload()
+            }).catch(err => {
+                console.error(err)
+            })
+        }
+    })
     
     return ( 
         <div className="container">
             <div className="header">
-                <h1>{props.name}</h1>
+                <h1>{props.name} ({props.stage} Stage)</h1>
                 <CustomLink url={`/tournaments/${props.uid}`} label="Tournament Home" target="_blank"/> 
+                <button onClick={revertStage}>Revert to last stage</button>
                 <button onClick={submitToApi}>Update Scores</button>
             </div>
             <Fixtures fixtures={fixtures} 
@@ -76,6 +93,7 @@ UpdateScores.getInitialProps = async (context) => {
         tables: data.tables,
         fixtures: mergedFixtures,
         mergedFixtures: mergedFixtures,
+        stage: data.stage
     }
     return {}
 }

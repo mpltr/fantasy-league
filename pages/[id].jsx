@@ -40,6 +40,15 @@ const Tournament = (props) => {
                         );
                     })}
                 </Tabs>
+                <Tabs tabtitle="Group Stats" color="red">
+                    <Table tabtitle="Overall Table"
+                            players={props.players}
+                            tablePlayerIds={Object.keys(props.players).map(playerId => playerId)}
+                    ></Table>
+                    <FormTable tabtitle="Form" players={props.players}>
+
+                    </FormTable>
+                </Tabs>
                 { props.fixtures['Last 32'] &&
                     <Tabs tabtitle="Knockouts" test={true} color="red">
                         <Fixtures tabtitle="Last 32"
@@ -76,16 +85,6 @@ const Tournament = (props) => {
                         }
                     </Tabs>
                 }
-                <Tabs tabtitle="Stats" color="red">
-                    <Table tabtitle="Overall Table"
-                            players={props.players}
-                            tablePlayerIds={Object.keys(props.players).map(playerId => playerId)}
-                    ></Table>
-                    <FormTable tabtitle="Form" players={props.players}>
-
-                    </FormTable>
-                </Tabs>
-                
             </Tabs>
             <style jsx>{`
                 .header {
