@@ -5,6 +5,7 @@ import fetch from 'isomorphic-unfetch'
 import Fixtures from '../components/Fixtures'
 import Message from '../components/Message'
 import FormTable from '../components/FormTable'
+import TournamentGraph from '../components/TournamentGraph'
 import Head from 'next/head'
 import get from '../lib/api'
 
@@ -51,38 +52,44 @@ const Tournament = (props) => {
                 </Tabs>
                 { props.fixtures['Last 32'] &&
                     <Tabs tabtitle="Knockouts" test={true} color="red">
-                        <Fixtures tabtitle="Last 32"
-                                  fixtures={props.fixtures['Last 32']}
-                                  players={props.players}>
-                        </Fixtures>
-                        { 
-                            props.fixtures['Last 16'] &&
-                                <Fixtures tabtitle="Last 16"
-                                    fixtures={props.fixtures['Last 16']}
+                        <div tabtitle="Graph">
+                            <TournamentGraph fixtures={props.fixtures}
+                                             players={props.players}/>
+                        </div>
+                        <Tabs tabtitle="Fixtures" color="teal">
+                            <Fixtures tabtitle="Last 32"
+                                    fixtures={props.fixtures['Last 32']}
                                     players={props.players}>
-                                </Fixtures>
-                        }
-                        {
-                             props.fixtures['Quarter Finals'] &&
-                                <Fixtures tabtitle="Quarter Finals"
-                                    fixtures={props.fixtures['Quarter Finals']}
-                                    players={props.players}>
-                                </Fixtures>
-                        }
-                        {
-                             props.fixtures['Semi Finals'] &&
-                                <Fixtures tabtitle="Semi Finals"
-                                    fixtures={props.fixtures['Semi Finals']}
-                                    players={props.players}>
-                                </Fixtures>
-                        }
-                        {
-                             props.fixtures['Final'] &&
-                                <Fixtures tabtitle="Final"
-                                    fixtures={props.fixtures['Final']}
-                                    players={props.players}>
-                                </Fixtures>
-                        }
+                            </Fixtures>
+                            { 
+                                props.fixtures['Last 16'] &&
+                                    <Fixtures tabtitle="Last 16"
+                                        fixtures={props.fixtures['Last 16']}
+                                        players={props.players}>
+                                    </Fixtures>
+                            }
+                            {
+                                props.fixtures['Quarter Finals'] &&
+                                    <Fixtures tabtitle="Quarter Finals"
+                                        fixtures={props.fixtures['Quarter Finals']}
+                                        players={props.players}>
+                                    </Fixtures>
+                            }
+                            {
+                                props.fixtures['Semi Finals'] &&
+                                    <Fixtures tabtitle="Semi Finals"
+                                        fixtures={props.fixtures['Semi Finals']}
+                                        players={props.players}>
+                                    </Fixtures>
+                            }
+                            {
+                                props.fixtures['Final'] &&
+                                    <Fixtures tabtitle="Final"
+                                        fixtures={props.fixtures['Final']}
+                                        players={props.players}>
+                                    </Fixtures>
+                            }
+                        </Tabs>
                     </Tabs>
                 }
             </Tabs>
