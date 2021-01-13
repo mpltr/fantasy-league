@@ -14,6 +14,14 @@ const UpdateScores = (props) => {
     selectedFixtures[selectedDate] = fixtures[selectedDate]
 
     const submitToApi = useCallback(() => {
+
+        // console.log(JSON.stringify(
+        //     {
+        //         fixtures: fixtures, 
+        //         id: props.id
+        //     }
+        // ));
+        // return;
         post({
             endpoint: 'fixtures',
             params: {
@@ -54,28 +62,12 @@ const UpdateScores = (props) => {
                 {props.stage !== 'Group' && 
                     <button onClick={revertStage}>Revert to last stage</button>
                 }
-                <select name="date" 
-                        value={selectedDate} 
-                        onChange={(e) => setSelectedDate(e.target.value)}>
-                    <option value="">Please Select</option>
-                    {Object.keys(fixtures).map((date, i) => {
-                        const firstFixture = fixtures[date][0];
-                        const stage = firstFixture['stage'];
-                        const text = stage !== 'Group' ? stage : `Matchweek ${i + 1}`;
-                        return <option value={date} key={date}>{text}</option>
-                    })}
-                </select>
                 <button onClick={submitToApi}>Update Scores</button>
             </div>
-            {selectedDate && 
-                 <Fixtures fixtures={selectedFixtures} 
-                    players={props.players} 
-                    editmode={true}
-                    updateFixtures={updateFixtures}
-                    allFixtures={fixtures}
-                    setSelectedDate={setSelectedDate}
-                />
-            }
+            <Fixtures fixtures={fixtures} 
+                      players={props.players} 
+                      editmode={true}
+                      updateFixtures={updateFixtures}/>
            
             <style jsx>{`
                 .container {
@@ -88,10 +80,8 @@ const UpdateScores = (props) => {
                     align-items: center;
                     height: 39px;
                 }
-
-                select {
-                    height: 100%;
-                    margin: 0 8px;
+                button {
+                    margin-right: 16px;
                 }
                 h1 {
                     margin: 0;
