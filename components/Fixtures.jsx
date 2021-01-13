@@ -27,11 +27,10 @@ class Fixtures extends Component {
                        value={date}
                        onChange={e => {
                             const newDate = e.target.value;
-                            const newFixtures = { ...this.props.allFixtures};
-                            newFixtures[newDate] = this.props.allFixtures[date]
-                            this.props.setSelectedDate(newDate)
-                            delete newFixtures[date]  
-                            this.props.updateFixtures(newFixtures)                        
+                            const newFixtures = { ...this.props.fixtures};
+                            newFixtures[newDate] = this.props.fixtures[date]
+                            delete newFixtures[date]                                    
+                            this.props.updateFixtures(newFixtures)
                        }}>
                 </input>
                 <style jsx>{`
