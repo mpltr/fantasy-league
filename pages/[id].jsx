@@ -5,7 +5,9 @@ import fetch from 'isomorphic-unfetch'
 import Fixtures from '../components/Fixtures'
 import Message from '../components/Message'
 import FormTable from '../components/FormTable'
+import TournamentGraph from '../components/TournamentGraph'
 import Head from 'next/head'
+import get from '../lib/api'
 
 const Tournament = (props) => {
     const title = `FPL Cup ${props.name}`
@@ -39,16 +41,7 @@ const Tournament = (props) => {
                         );
                     })}
                 </Tabs>
-                { props.fixtures['Last 16'] &&
-                    <Tabs tabtitle="Knockouts" test={true} color="red">
-                        <Fixtures tabtitle="Last 16"
-                                  fixtures={props.fixtures['Last 16']}
-                                  players={props.players}>
-                        </Fixtures>
-                        {/* <div></div> */}
-                    </Tabs>
-                }
-                <Tabs tabtitle="Stats" color="red">
+                <Tabs tabtitle="Group Stats" color="red">
                     <Table tabtitle="Overall Table"
                             players={props.players}
                             tablePlayerIds={Object.keys(props.players).map(playerId => playerId)}
@@ -57,7 +50,48 @@ const Tournament = (props) => {
 
                     </FormTable>
                 </Tabs>
-                
+                { props.fixtures['Last 32'] &&
+                    <Tabs tabtitle="Knockouts" test={true} color="red">
+                        <div tabtitle="Graph">
+                            <TournamentGraph fixtures={props.fixtures}
+                                             players={props.players}/>
+                        </div>
+                        <Tabs tabtitle="Fixtures" color="teal">
+                            <Fixtures tabtitle="Last 32"
+                                    fixtures={props.fixtures['Last 32']}
+                                    players={props.players}>
+                            </Fixtures>
+                            { 
+                                props.fixtures['Last 16'] &&
+                                    <Fixtures tabtitle="Last 16"
+                                        fixtures={props.fixtures['Last 16']}
+                                        players={props.players}>
+                                    </Fixtures>
+                            }
+                            {
+                                props.fixtures['Quarter Finals'] &&
+                                    <Fixtures tabtitle="Quarter Finals"
+                                        fixtures={props.fixtures['Quarter Finals']}
+                                        players={props.players}>
+                                    </Fixtures>
+                            }
+                            {
+                                props.fixtures['Semi Finals'] &&
+                                    <Fixtures tabtitle="Semi Finals"
+                                        fixtures={props.fixtures['Semi Finals']}
+                                        players={props.players}>
+                                    </Fixtures>
+                            }
+                            {
+                                props.fixtures['Final'] &&
+                                    <Fixtures tabtitle="Final"
+                                        fixtures={props.fixtures['Final']}
+                                        players={props.players}>
+                                    </Fixtures>
+                            }
+                        </Tabs>
+                    </Tabs>
+                }
             </Tabs>
             <style jsx>{`
                 .header {
@@ -76,7 +110,7 @@ const Tournament = (props) => {
 Tournament.getInitialProps = async (context) => {
 
     const uid = context.query.id;
-    const {name, numberOfGroupTeamsToProgress, players, tables, fixtures, knockout, updates} = await fetch(`${process.env.NEXT_PUBLIC_API}/tournament/${uid}`).then(res => res.json());
+    const {name, numberOfGroupTeamsToProgress, players, tables, fixtures, knockout, updates} = await get({endpoint: `/tournament/${uid}`})
 
     return {
         name,
